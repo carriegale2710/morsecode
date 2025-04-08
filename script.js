@@ -4,9 +4,20 @@ import { morseKeys } from "./assets/keys.js";
 
 
 
+form.addEventListener("submit", (e) => { // how to read values from inputs
+    e.preventDefault()
+    console.log("form submitted"); 
+    const formData = new FormData(form);
+    return formData;
+};
 
 
-export const userInput = document.querySelector("#userInput").map((char) => char.toLowerCase());
+for (const [key, value] of formData) {
+    console.log(key, value, " Form data");
+};
+const rawInput = +formData.get("#userInput");
+
+export const userInput = rawInput.value.map((char) => char.toLowerCase());
 console.log(userInput);
 
 

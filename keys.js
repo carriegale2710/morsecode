@@ -1,5 +1,5 @@
 // A to Z in Morse Code
- const morse = {
+export const morseKeys = {
     "A": ".-",
     "B": "-...",
     "C": "-.-.",

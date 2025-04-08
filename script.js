@@ -1,7 +1,16 @@
-import { morseKeys } from "./keys.js";
+
+import { inputTranslator } from "./functions.js";
+import { morseKeys } from "./assets/keys.js";
 
 
-console.log(morseKeys.A);
+
+
+
+export const userInput = document.querySelector("#userInput").map((char) => char.toLowerCase());
+console.log(userInput);
+
+
+
 
 
 //NOTE - Template
@@ -14,3 +23,6 @@ console.log(morseKeys.A);
 //     return result ;
 // };
     
+
+
+

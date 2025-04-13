@@ -1,6 +1,3 @@
-import { morseKeys } from "./assets/keys.js";
-// import { userInput } from "./script.js";
-
 
 
 // for (const [key, value] of Object.entries(morseKeys)) {
@@ -9,13 +6,11 @@ import { morseKeys } from "./assets/keys.js";
 
 
 
-const userInput = ".... . .-.. .-.. ---".split(" ");
-//need to split morse code between two spaces?
-// console.log(userInput);
 
 //NOTE - stuck on how loops again...
 
-export const inputTranslator = Object.keys(morseKeys, userInput).forEach(key => {
+export const morseTranslator (userInput, morseKeys) =>  {
+    Object.keys(morseKeys, userInput).forEach(key => {
     if (userInput.includes("number" || false)) {
         throw new Error("Invalid Input - no numbers allowed");
     } 
@@ -31,7 +26,7 @@ export const inputTranslator = Object.keys(morseKeys, userInput).forEach(key => 
         }
     }
      console.log(translation.join("")) ; 
-});
+})};
 
 
 

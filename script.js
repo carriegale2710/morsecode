@@ -1,8 +1,13 @@
 
-import { inputTranslator } from "./functions.js";
+import { morseTranslator } from "./functions.js";
 import { morseKeys } from "./assets/keys.js";
 
 
+const userInput = ".... . .-.. .-.. ---".split(" ");
+//need to split morse code between two spaces?
+// console.log(userInput);
+
+const invalidParamType = "Enter a valid number";
 
 form.addEventListener("submit", (e) => { // how to read values from inputs
     e.preventDefault()

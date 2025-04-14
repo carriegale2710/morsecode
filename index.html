@@ -13,16 +13,15 @@
     </header>
     <main>
         <section>
-            <form >
-                <label for="userInput">Enter morse code: </label>
-                <textarea type="text" name="userInput" id="userInput"></textarea>
-                <br>
-                <button type="submit">Translate</button>
+            <form id="userSubmissionForm" >
+                <label for="userInput">Enter morse code: </label> <br>
+                <textarea type="text" name="textAreaInput" id="textAreaInput" placeholder="Enter text here...(for morse code, separate by two spaces)"></textarea>
+                <br><button type="submit">Translate</button>
             </form>
         </section>
         <section>
             <label for="morseOutput">Translation: </label>
-            <textarea type="text" name="morseOutput"></textarea>
+            <textarea type="text" name="textAreaOutput" id="textAreaOutput"  placeholder="Translation comes out here..."></textarea>
         </section>
     </main>
 </body>

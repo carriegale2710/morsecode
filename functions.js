@@ -1,4 +1,4 @@
-
+//SECTION - translator logic goes here
 
 // for (const [key, value] of Object.entries(morseKeys)) {
 //     console.log(`Key: ${key}, Value: ${value}`);
@@ -9,24 +9,45 @@
 
 //NOTE - stuck on how loops again...
 
-export const morseTranslator (userInput, morseKeys) =>  {
-    Object.keys(morseKeys, userInput).forEach(key => {
-    if (userInput.includes("number" || false)) {
-        throw new Error("Invalid Input - no numbers allowed");
-    } 
-    // const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const value = morseKeys[key];
-    // console.log(`Key: ${key}, Value: ${value}`); //key //value
-    let translation = [];
-    for (let i=0; i<=26; i++){
-        if (userInput[i] === key){
-            translation.push(value);
-        } else if (userInput[i] === value){
-            translation.push(key);
-        }
-    }
-     console.log(translation.join("")) ; 
-})};
+export const morseTranslator = (userInputDataArr, morseKeys) =>  {
+    console.log(userInputDataArr);
+    
+    //set up collection array
+    const translation = [];
+
+    // forEach letter / key the alphabet
+    // Object.keys(morseKeys)
+    
+    //define key:value variables
+    // const value = morseKeys[key];
+    const keyArr = Object.keys(morseKeys);
+    // console.log(keyArr)
+    const entriesArr = Object.entries(morseKeys);
+    // console.log(keyArr); //every letter in lowercase
+    console.log(entriesArr);
+    
+    for (let currentKey of userInputDataArr) { //for each char/morse in user input array
+        // const currentKey = userInputDataArr[i];
+        //if the current key is a letter...
+
+        if (keyArr.includes(currentKey.toUpperCase())){ 
+            const keyValue = morseKeys[currentKey.toUpperCase()];
+            console.log(keyValue); //morse code of key
+            translation.push(keyValue + '  '); 
+            //if the current key is a morse code ie. the value of a letter key...
+        } else if (Object.values(morseKeys).includes(currentKey)){
+            const keysOnly = entriesArr.filter(([key, value]) => value === currentKey? key : '');
+            console.log(keysOnly[0][0]);
+            translation.push(keysOnly[0][0] + ' ');
+            
+        };
+
+    };
+    
+    console.log(translation);
+
+    return translation.join(' '); 
+};   
 
 
 

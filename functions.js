@@ -29,24 +29,24 @@ export const morseTranslator = (userInputDataArr, morseKeys) =>  {
     for (let currentKey of userInputDataArr) { //for each char/morse in user input array
         // const currentKey = userInputDataArr[i];
         //if the current key is a letter...
-
-        if (keyArr.includes(currentKey.toUpperCase())){ 
+        if (currentKey === '  '){
+            translation.push(' <> ');
+        } else if (keyArr.includes(currentKey.toUpperCase())){ 
             const keyValue = morseKeys[currentKey.toUpperCase()];
             console.log(keyValue); //morse code of key
-            translation.push(keyValue + '  '); 
+            translation.push(keyValue +'  '); 
             //if the current key is a morse code ie. the value of a letter key...
         } else if (Object.values(morseKeys).includes(currentKey)){
             const keysOnly = entriesArr.filter(([key, value]) => value === currentKey? key : '');
             console.log(keysOnly[0][0]);
-            translation.push(keysOnly[0][0] + ' ');
-            
+            translation.push(keysOnly[0][0]);
         };
 
     };
     
-    console.log(translation);
+    
 
-    return translation.join(' '); 
+    return translation.join('').replaceAll("<>", " "); 
 };   
 
 

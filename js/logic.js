@@ -74,8 +74,8 @@ export const morseTranslator = (userInput, morseKeys) =>  {
             console.log(keysOnly[0][0]);
             translation.push(keysOnly[0][0]);
         };
-
     };
+    
     return translation.join('')/*.replaceAll("/", " ")*/; 
 };  
 

@@ -1,6 +1,6 @@
 
 //SECTION - real
-import { morseTranslator, morseKeys, invalidParamType} from "./script.js";
+import { morseTranslator, morseKeys } from "./js/script.js";
 
 
 describe("Test cases for a morseTranslator", () => {

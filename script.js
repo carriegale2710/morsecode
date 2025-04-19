@@ -1,4 +1,3 @@
-//SECTION - event listeners go here
 
 // import { morseTranslator } from "./functions.js";
 import { morseKeys } from "./assets/keys.js";
@@ -6,47 +5,73 @@ import { morseKeys } from "./assets/keys.js";
 
 
 
-export const invalidParamType = new Error("Enter valid input");
+//SECTION - functional logic goes here
 
-// const userInput = ".... . .-.. .-.. ---".split(" ");
-// export const userInput = rawInput.value.map((char) => char.toLowerCase());
+//INPUT
+// if the input string has ANY alpha-numeric characters, assume that it should be converted into morse code
+// if none, assume it must be translated into words
 
-//need to split morse code between two spaces?
-// console.log(userInput);
+//OUTPUT
+// 1 space between letters
+// 2 spaces or "/" between words 
 
-const submitButton = document.querySelector("button");
-const form = document.querySelector("#userSubmissionForm");
-const textAreaInput = document.querySelector("#textAreaInput");
-const textAreaOutput = document.querySelector("#textAreaOutput");
 
-export const rawMessage =  form.addEventListener("submit", (e) => { // how to read values from inputs
-    e.preventDefault();
-    const userInputData = textAreaInput.value;
-    console.log(userInputData);
-    let userInputDataArr;
+//NOTE - stuck on how loops again...
+
+const morseTranslator = (userInput, morseKeys) =>  {
+    console.log(userInput);
+
+    let userInputArr;
     
     //split the string into keys in an array - compare with the object? (!!!)
-    if (userInputData.includes('  ')) {
-        userInputDataArr = userInputData.split('  '); //if morse .split('  ');
+    if (userInput.includes('  ')) {
+        userInputArr = userInput.split('  '); //if morse .split('  ');
     } else {
-        userInputDataArr = userInputData.split(''); //if words, split by letter
+        userInputArr = userInput.split(''); //if words, split by letter
     }
+
+    console.log(userInputArr);
+
     
-    // console.log(userInputDataArr);
+    //set up collection array
+    const translation = [];
+
+    // forEach letter / key the alphabet
+    // Object.keys(morseKeys)
     
-    //validateInput()
+    //define key:value variables
+    // const value = morseKeys[key];
+    const keyArr = Object.keys(morseKeys);
+    // console.log(keyArr)
+    const entriesArr = Object.entries(morseKeys);
+    // console.log(keyArr); //every letter in lowercase
+    
+    for (let currentKey of userInputArr) { //for each char/morse in user input array
+        // const currentKey = userInputDataArr[i];
+        //if the current key is a letter...
+        if (currentKey === '  '){
+            translation.push(' / ');
+        } else if (keyArr.includes(currentKey.toUpperCase())){ 
+            const keyValue = morseKeys[currentKey.toUpperCase()];
+            console.log(keyValue); //morse code of key
+            translation.push(keyValue +'  '); 
+            //if the current key is a morse code ie. the value of a letter key...
+        } else if (Object.values(morseKeys).includes(currentKey)){
+            const keysOnly = entriesArr.filter(([key, value]) => value === currentKey? key : '');
+            console.log(keysOnly[0][0]);
+            translation.push(keysOnly[0][0]);
+        };
 
-    const translatedMessage = morseTranslator(userInputDataArr, morseKeys);
-    console.log(translatedMessage);
-
-    textAreaOutput.value = translatedMessage;
-
-});
+    };
+    return translation.join('')/*.replaceAll("/", " ")*/; 
+};  
 
 
-//SECTION - User Input Validation Fn
 
-//NOTE - Template
+
+//NOTE - ERROR HANDLING - INPUT VALIDATION
+
+// Template
 // export const someFn = (...args) => { // the rest function (...args) takes any number of params by accessing an array
 //     let result;
 //     if (args === false) {
@@ -55,9 +80,20 @@ export const rawMessage =  form.addEventListener("submit", (e) => { // how to re
 //     return result ;
 // };
 
-const validateInput = (userInputDataArr) => {
+
+const invalidParamType = new Error("Enter valid input");
 
 
+const validateInput = (userInput) => {
+
+    let userInputArr;
+    
+    //split the string into keys in an array - compare with the object? (!!!)
+    if (userInput.includes('  ')) {
+        userInputArr = userInput.split('  '); //if morse .split('  ');
+    } else {
+        userInputArr = userInput.split(''); //if words, split by letter
+    }
     
     if (userInputDataArr == []) {
         throw {invalidParamType};
@@ -79,103 +115,44 @@ const validateInput = (userInputDataArr) => {
 }
 
 
+ 
+
+//SECTION - event listeners go here
 
 
-// for (const [key, value] of formData) {
-//     console.log(key, value, " Form data");
-// };
-// const rawInput = +formData.get("#userInput");
+// const userInput = ".... . .-.. .-.. ---".split(" ");
+// export const userInput = rawInput.value.map((char) => char.toLowerCase());
+
+//need to split morse code between two spaces?
+// console.log(userInput);
+
+const submitButton = document.querySelector("button");
+const form = document.querySelector("#userSubmissionForm");
+const textAreaInput = document.querySelector("#textAreaInput");
+const textAreaOutput = document.querySelector("#textAreaOutput");
 
 
+const rawMessage =  form.addEventListener("submit", (e) => { // how to read values from inputs
+    e.preventDefault();
+    const userInput = textAreaInput.value;
+    console.log(userInput);
 
-
-
-
-
-
-
-
-//SECTION - translator logic goes here
-
-//INPUT
-// if the input string has ANY alpha-numeric characters, assume that it should be converted into morse code
-// if none, assume it must be translated into words
-
-//OUTPUT
-// 1 space between letters
-// 2 spaces or "/" between words 
-
-
-//NOTE - stuck on how loops again...
-
-const morseTranslator = (userInputDataArr, morseKeys) =>  {
-    console.log(userInputDataArr);
     
-    //set up collection array
-    const translation = [];
-
-    // forEach letter / key the alphabet
-    // Object.keys(morseKeys)
+    // console.log(userInputDataArr);
     
-    //define key:value variables
-    // const value = morseKeys[key];
-    const keyArr = Object.keys(morseKeys);
-    // console.log(keyArr)
-    const entriesArr = Object.entries(morseKeys);
-    // console.log(keyArr); //every letter in lowercase
-    
-    for (let currentKey of userInputDataArr) { //for each char/morse in user input array
-        // const currentKey = userInputDataArr[i];
-        //if the current key is a letter...
-        if (currentKey === '  '){
-            translation.push(' / ');
-        } else if (keyArr.includes(currentKey.toUpperCase())){ 
-            const keyValue = morseKeys[currentKey.toUpperCase()];
-            console.log(keyValue); //morse code of key
-            translation.push(keyValue +'  '); 
-            //if the current key is a morse code ie. the value of a letter key...
-        } else if (Object.values(morseKeys).includes(currentKey)){
-            const keysOnly = entriesArr.filter(([key, value]) => value === currentKey? key : '');
-            console.log(keysOnly[0][0]);
-            translation.push(keysOnly[0][0]);
-        };
+    //validateInput()
 
-    };
-    return translation.join('')/*.replaceAll("/", " ")*/; 
-};   
+    const translatedMessage = morseTranslator(userInput, morseKeys);
+    console.log(translatedMessage);
+
+    textAreaOutput.value = translatedMessage;
+
+});
 
 
 
 
 
 
-
-
-
-
-
-
-
-// const morseKeysArr = Object.values(morseKeys);
-
-
-
-// export const  translateInput = (morseInput, morseKeys) =>  {
-
-//     //test later
-//     
-//     if (morseInput.map((l) => l.toLowerCase().includes());
-// }
-
-
-
-
-// const letterKeysArr = Object.keys(morseKeys).map((l) => l.toLowerCase());
-// console.log(letterKeysArr);
-
-// console.log(morseKeysArr);
-
-
-
-//SECTION - rendering things on DOM goes here
+//SECTION - DOM - rendering things goes here
 

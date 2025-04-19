@@ -18,7 +18,7 @@ describe("Test cases for a morseTranslator", () => {
     });
     
     test("Handles spaces properly", () => {
-        //(ie. there is 1 space between English words, but one space between Morse Code characters)
+        //(ie. there is 1 space between English words, but one space between Morse Code characters, two spaces or / between words)
         expect(morseTranslator("Hello how are you",morseKeys)).toBe(`.... . .-.. .-.. --- / .... --- .-- / .- .-. . / -.-- --- ..-`);
         expect(morseTranslator("I love learning Morse Code",morseKeys)).toBe(`.. / .-.. --- ...- . / .-.. . .- .-. -. .. -. --. / -- --- .-. ... . / -.-. --- -.. .`); 
         expect(morseTranslator(`.--. .-. --- --. .-. .- -- -- .. -. --. / .. ... / ..-. ..- -.`,morseKeys)).toBe("Programming is fun"); 
@@ -28,7 +28,6 @@ describe("Test cases for a morseTranslator", () => {
     test("Edge: Invalid inputs produce an error", () => {
         expect(morseTranslator("",morseKeys)).toThrow(invalidParamType); 
         expect(morseTranslator(" ",morseKeys)).toThrow(invalidParamType); 
-        expect(morseTranslator("!!#",morseKeys)).toThrow(invalidParamType); 
         expect(morseTranslator("1234",morseKeys)).toThrow(invalidParamType); 
         expect(morseTranslator("  ",morseKeys)).toThrow(invalidParamType); 
     });

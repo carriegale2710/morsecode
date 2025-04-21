@@ -11,23 +11,9 @@
 
 export const morseTranslator = (userInput, morseKeys) =>  {
     
-    //NOTE - Step 1: split the string into keys in an array 
-    
-    console.log(userInput);
-    //arrow fn ver
-    // const splitInput = (userInput) => userInput.includes('  ') ? userInput.split('  ') : userInputArr = userInput.split('');
+    //NOTE - Step 1: Validate the input array
 
-    let userInputArr;
-    if (userInput.includes('  ')) {
-        userInputArr = userInput.split('  '); //if morse .split('  ');
-    } else {
-        userInputArr = userInput.split(''); //if words, split by letter
-    }
-    console.log(userInputArr);
-
-    //NOTE - Step 2: Validate the input array
-
-    const invalidParamType = new Error("Enter valid input");
+    const invalidParamType =  new Error("Enter valid input");
     
     if (userInputArr == []) {
         throw {invalidParamType};
@@ -45,7 +31,25 @@ export const morseTranslator = (userInput, morseKeys) =>  {
         throw {invalidParamType};
     };
 
-    console.log("form submitted");
+    // console.log("form submitted");
+    
+
+    //NOTE - Step 2: split the string into keys in an array 
+    
+    // console.log(userInput);
+    //arrow fn ver
+    // const splitInput = (userInput) => userInput.includes('  ') ? userInput.split('  ') : userInputArr = userInput.split('');
+
+    let userInputArr;
+    if (userInput.includes('  ')) {
+        userInputArr = userInput.split('  '); //if morse .split('  ');
+    } else {
+        userInputArr = userInput.split(''); //if words, split by letter
+    }
+    // console.log(userInputArr);
+
+    
+
     
 
     //NOTE - Step 3: Translate each character of input using provided morseKeys Object as param
@@ -66,16 +70,16 @@ export const morseTranslator = (userInput, morseKeys) =>  {
             translation.push(' / ');
         } else if (keyArr.includes(currentKey.toUpperCase())){ 
             const keyValue = morseKeys[currentKey.toUpperCase()];
-            console.log(keyValue); //morse code of key
+            // console.log(keyValue); //morse code of key
             translation.push(keyValue +'  '); 
             //if the current key is a morse code ie. the value of a letter key...
         } else if (Object.values(morseKeys).includes(currentKey)){
             const keysOnly = entriesArr.filter(([key, value]) => value === currentKey? key : '');
-            console.log(keysOnly[0][0]);
+            // console.log(keysOnly[0][0]);
             translation.push(keysOnly[0][0]);
         };
     };
     
-    return translation.join('')/*.replaceAll("/", " ")*/; 
+    return translation.join('').trim()/*.replaceAll("/", " ")*/; 
 };  
 

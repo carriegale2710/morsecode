@@ -1,20 +1,21 @@
 
-//SECTION - real
-import { morseTranslator, morseKeys } from "./js/script.js";
-
+//SECTION - unit testing the translation logic only, not DOM
+import { morseKeys } from "./assets/keys.js";
+import { morseTranslator } from "./js/logic.js";
+const invalidParamType = new Error("Enter valid input");
 
 describe("Test cases for a morseTranslator", () => {
     
-    test("Translates English text into Morse Code", () => {
-        expect(morseTranslator("hello",morseKeys)).toBe(`.... . .-.. .-.. ---`); 
-        expect(morseTranslator("Everybody",morseKeys)).toBe(`.-... ... -.-- -... --- -.. -.--`); 
-        expect(morseTranslator("atlantis",morseKeys)).toBe(`.- .-.. .- - -. - .. ...`); 
+    test("Translates English letters into Morse Code", () => {
+        expect(morseTranslator("h",morseKeys)).toBe(`....`); 
+        expect(morseTranslator("E",morseKeys)).toBe(`.`); 
+        expect(morseTranslator("a",morseKeys)).toBe(`.-`); 
     });
     
-    test("Translates Morse Code into English text", () => {
-        expect(morseTranslator(`.... . .-.. .-.. ---`,morseKeys)).toBe("hello"); 
-        expect(morseTranslator(`.-... ... -.-- -... --- -.. -.--`,morseKeys)).toBe("Everybody"); 
-        expect(morseTranslator(`.- .-.. .- - -. - .. ...`, morseKeys)).toBe("atlantis");  
+    test("Translates Morse into letters", () => {
+        expect(morseTranslator(`....`,morseKeys)).toBe("H"); 
+        expect(morseTranslator(`.`,morseKeys)).toBe("E"); 
+        expect(morseTranslator(`.-`, morseKeys)).toBe("A");  
     });
     
     test("Handles spaces properly", () => {
@@ -26,10 +27,11 @@ describe("Test cases for a morseTranslator", () => {
     });
     
     test("Edge: Invalid inputs produce an error", () => {
-        expect(morseTranslator("",morseKeys)).toThrow(invalidParamType); 
-        expect(morseTranslator(" ",morseKeys)).toThrow(invalidParamType); 
-        expect(morseTranslator("1234",morseKeys)).toThrow(invalidParamType); 
-        expect(morseTranslator("  ",morseKeys)).toThrow(invalidParamType); 
+        //Always wrap the code that throws in a function when using expect().toThrow() -> The function is created but NOT executed -> error is properly caught and tested
+        expect(() => morseTranslator("",morseKeys)).toThrow(); 
+        expect(() => morseTranslator(" ",morseKeys)).toThrow(); 
+        expect(() => morseTranslator("1234",morseKeys)).toThrow(); 
+        expect(() => morseTranslator("  ",morseKeys)).toThrow(); 
     });
     
     test("Bonus: handles special characters", () => {

@@ -24,8 +24,10 @@ Auto-detect the language - the app should auto-detect whether the input is in Mo
 
 -   [Iterate Object in JavaScript](https://www.javascripttutorial.net/object/iterate-object-in-javascript/)
 -   [Looping through objects keys and values in Javascript?](https://flexiple.com/loop-through-object-javascript/)
+-   https://morsecode.world/international/translator.html
+-   https://students.cs.ucl.ac.uk/schoolslab/projects/PY2/introduction.html
 
-### About Morse Code
+## About Morse Code
 
 Source: https://students.cs.ucl.ac.uk/schoolslab/projects/PY2/introduction.html
 
